@@ -11,6 +11,8 @@ from logic.browser.base_app_page import BaseAppPage
 class HomePage(BasePage):
 
     ALL_ITEMS_IN_PAGE = '//div[@class="col-xl-3 col-lg-4 col-md-6 col-sm-12"]'
+    HIGH_RATING_ITEMS = '//div[@class="active carousel-item"]'
+    HIGH_RATING_BANNER_PREV = '//a[@class="carousel-control-prev"]'
 
     def __init__(self, driver):
         """
@@ -21,7 +23,11 @@ class HomePage(BasePage):
         super().__init__(driver)
 
     def select_and_open_item(self, item_number):
-        """ Clicks on item. """
+        """
+        Selects an item by its number and opens its details page.
+        Args:
+            item_number (int): The index of the item to select (0-based index).
+        """
         try:
             items = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_all_elements_located((By.XPATH, self.ALL_ITEMS_IN_PAGE)))

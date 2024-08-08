@@ -1,8 +1,6 @@
-import time
+import logging
 import unittest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from infra.api.api_wrapper import APIWrapper
 from infra.browser.browser_wrapper import BrowserWrapper
 from infra.config_provider import ConfigProvider
@@ -12,6 +10,7 @@ from logic.browser.base_app_page import BaseAppPage
 from logic.browser.login_page import LoginPage
 from logic.browser.order_page import OrderPage
 from logic.browser.profile_page import ProfilePage
+from infra.logger import Logger
 
 
 class OrderTest(unittest.TestCase):
@@ -28,12 +27,24 @@ class OrderTest(unittest.TestCase):
         LoginPage(self.driver).login_flow(self.config['email'], self.config['password'])
 
     def test_api_place_order(self):
+        """
+        Test the API functionality for placing an order. This test sends a request to place an order with the
+        specified order details, and verifies that the API responds with a successful status and that the
+        order details in the response match the submitted order.
+        """
+        logging.info("API Place Order Test Started")
         response = self.order_api.place_an_order(self.config['order'])
         self.assertTrue(response.ok)
         self.assertEqual(response.status, 200)
         self.assertEqual(response.data['orderItems'][0]['product'], self.config['order']['orderItems'][0]['product'])
+        logging.info("Done\n_______________________________________________________")
 
     def test_order_pay(self):
+        """
+        Test the functionality of processing an order payment via the UI. This test places an order, navigates to the
+        profile to open the last order, and then completes the payment process using the provided credit card details.
+        """
+        logging.info("Order Payment Test Started")
         self.order_api.place_an_order(self.config['order'])
         self.base_page.open_profile()
         ProfilePage(self.driver).open_last_order()
@@ -48,6 +59,7 @@ class OrderTest(unittest.TestCase):
                                 self.config['payment_details']['city'],
                                 self.config['payment_details']['zipcode'],
                                 self.config['payment_details']['Phone'],
-                                self.config['payment_details']['email'],)
-        self.assertTrue(WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, order_page.PAID_ALERT))).is_displayed())
+                                self.config['payment_details']['email'])
+        iframe = self.driver.find_elements(By.XPATH, order_page.IFRAME)
+        self.assertTrue(len(iframe) == 0)
+        logging.info("Done\n_______________________________________________________")

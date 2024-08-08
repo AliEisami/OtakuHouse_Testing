@@ -9,6 +9,13 @@ class OrderAPI:
         self._config = ConfigProvider.load_from_file()
 
     def place_an_order(self, payload):
+        """
+        Places an order with the given payload.
+        Args:
+            payload (dict): The order details to be sent in the request body.
+        Returns:
+            Response: The response object from the POST request.
+        """
         payload = payload
         headers = {
             "Authorization": self._config['Authorization']

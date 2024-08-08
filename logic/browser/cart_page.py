@@ -18,6 +18,11 @@ class CartPage(BasePage):
         super().__init__(driver)
 
     def get_items_in_cart(self):
+        """
+        Retrieves all items currently in the cart.
+        Returns:
+            list: A list of WebElement objects representing the items in the cart, or None if no items are found.
+        """
         try:
             return WebDriverWait(self._driver, 5).until(
                 EC.presence_of_all_elements_located((By.XPATH, self.CART_ITEMS)))

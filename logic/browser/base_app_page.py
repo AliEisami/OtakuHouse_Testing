@@ -25,7 +25,9 @@ class BaseAppPage(BasePage):
         super().__init__(driver)
 
     def home_button_click(self):
-        """ Clicks on the Home button. """
+        """
+        Clicks the home button to navigate to the homepage.
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.HOME_BUTTON)))
         try:
@@ -35,7 +37,11 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def fill_search_input(self, item_name):
-        """ Enter String to Search input. """
+        """
+        Enters the specified item name into the search input field.
+        Args:
+            item_name (str): The name of the item to search for.
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.SEARCH_INPUT)))
         try:
@@ -45,7 +51,9 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def search_button_click(self):
-        """ Clicks on the search button. """
+        """
+        Clicks the search button to initiate a search.
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.SEARCH_BUTTON)))
         try:
@@ -55,7 +63,9 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def cart_button_click(self):
-        """ Clicks on the cart button. """
+        """
+        Clicks the cart button to view the items in the cart.
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.CART_BUTTON)))
         try:
@@ -65,7 +75,9 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def login_button_click(self):
-        """ Clicks on the login button. """
+        """
+        Clicks the login button to navigate to the login page.
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.LOGIN_BUTTON)))
         try:
@@ -75,6 +87,9 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def open_profile(self):
+        """
+        Opens the user profile dropdown and selects the profile option.
+        """
         try:
             username_dropdown = WebDriverWait(self._driver, 5).until(
                 EC.element_to_be_clickable((By.XPATH, self.USERNAME_DROPDOWN)))
@@ -86,10 +101,18 @@ class BaseAppPage(BasePage):
             print("NoSuchElementException:", e)
 
     def search_flow(self, item_name):
+        """
+        Performs the full search process: entering the item name and clicking the search button.
+        Args:
+            item_name (str): The name of the item to search for.
+        """
         self.fill_search_input(item_name)
         self.search_button_click()
 
     def logout(self):
+        """
+        Logs out the user by clicking on the username dropdown and then clicking the logout button.
+        """
         try:
             username_dropdown = WebDriverWait(self._driver, 5).until(
                 EC.element_to_be_clickable((By.XPATH, self.USERNAME_DROPDOWN)))

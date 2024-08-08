@@ -28,6 +28,11 @@ class ItemPage(BaseAppPage):
             print("NoSuchElementException:", e)
 
     def select_quantity(self, quantity):
+        """
+        Selects the quantity of an item from a dropdown menu.
+        Args:
+            quantity (int): The quantity to select (1-based index).
+        """
         WebDriverWait(self._driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, self.QTY_SELECT)))
         try:
@@ -37,5 +42,10 @@ class ItemPage(BaseAppPage):
             print("NoSuchElementException:", e)
 
     def add_item_to_cart_flow(self, quantity):
+        """
+        Selects the item quantity and clicks the "Add to Cart" button.
+        Args:
+            quantity (int): The quantity of the item to add to the cart.
+        """
         self.select_quantity(quantity)
         self.add_to_cart_button_click()

@@ -9,6 +9,14 @@ class LoginAPI:
         self._config = ConfigProvider.load_from_file()
 
     def login(self, email, password):
+        """
+        Authenticates a user with the provided email and password.
+        Args:
+            email (str): The email address of the user.
+            password (str): The password for the user account.
+        Returns:
+            Response: The response object from the POST request.
+        """
         payload = {
             "username": email,
             "password": password

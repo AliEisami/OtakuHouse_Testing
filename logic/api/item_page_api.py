@@ -9,6 +9,15 @@ class ItemPageAPI:
         self._config = ConfigProvider.load_from_file()
 
     def review_item(self, product, rating, review):
+        """
+        Submits a review for a product with the given rating and comment.
+        Args:
+            product (int): The product ID to review.
+            rating (int): The rating given to the product (e.g., 1-5).
+            review (str): The review comment for the product.
+        Returns:
+            Response: The response object from the POST request.
+        """
         payload = {
             "rating": rating,
             "comment": review
