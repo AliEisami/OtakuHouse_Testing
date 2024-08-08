@@ -1,0 +1,15 @@
+{
+  "browser": "Chrome",
+  "url": "http://127.0.0.1:8000",
+  "register_endpoint": "/api/users/register/",
+  "login_endpoint" : "/api/users/login/",
+  "get_product_endpoint": "/api/products/",
+  "review_endpoint": "/reviews/",
+  "email" : "qautomation5tech@gmail.com",
+  "username" : "5tech",
+  "password" : "@QAutomation5",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NjA5MTA2LCJqdGkiOiJiYjI4OWE3ZTdhZWU0MzFiYjY1MTJiYjY2M2E1NzY3YSIsInVzZXJfaWQiOjh9.u00ijZXA-LSIlDcKQPVeUC-1LQFTYKT8BYcUU0EiuIw",
+  "search_item_name": "Demon",
+  "review_rating": "4",
+  "review_text": "its a good item"
+}
