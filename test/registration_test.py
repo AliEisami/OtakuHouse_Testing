@@ -23,13 +23,9 @@ class RegistrationTest(unittest.TestCase):
         self.assertTrue(response.ok)
         self.assertEqual(response.status, 200)
         self.assertEqual(response.data['username'], f"{username}@gmail.com")
-        self.login_api = LoginAPI(self.api_wrapper)
-        response = self.login_api.login(email, password)
-        self.assertTrue(response.ok)
-        self.assertEqual(response.status, 200)
-        self.assertEqual(response.data['name'], username)
 
     def test_api_invalid_register(self):
+        self.registration_api.registration(self.config['email'], self.config['username'], self.config['password'])
         response = self.registration_api.registration(self.config['email'], self.config['username'], self.config['password'])
         self.assertEqual(response.status, 400)
         self.assertEqual(response.data['detail'], "User with this email is already registered")

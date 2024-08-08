@@ -6,6 +6,7 @@ from infra.browser.browser_wrapper import BrowserWrapper
 from infra.config_provider import ConfigProvider
 from infra.utils import Utils
 from logic.api.login_api import LoginAPI
+from logic.api.registration_api import RegistrationAPI
 from logic.browser.base_app_page import BaseAppPage
 from logic.browser.login_page import LoginPage
 
@@ -19,6 +20,7 @@ class LoginTest(unittest.TestCase):
         self.login_api = LoginAPI(self.api_wrapper)
 
     def test_api_valid_login(self):
+        RegistrationAPI.registration(self.config['email'], self.config['username'], self.config['password'])
         response = self.login_api.login(self.config['email'], self.config['password'])
         self.assertTrue(response.ok)
         self.assertEqual(response.status, 200)

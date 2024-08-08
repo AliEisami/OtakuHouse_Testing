@@ -24,7 +24,7 @@ class HomePage(BasePage):
         """ Clicks on item. """
         try:
             items = WebDriverWait(self._driver, 5).until(
-            EC.presence_of_all_elements_located((By.XPATH, self.ALL_ITEMS_IN_PAGE)))
+                EC.presence_of_all_elements_located((By.XPATH, self.ALL_ITEMS_IN_PAGE)))
             self._driver.execute_script("arguments[0].scrollIntoView(true);", items[int(item_number)])
             time.sleep(1)
             items[int(item_number)].click()

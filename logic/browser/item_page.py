@@ -20,7 +20,6 @@ class ItemPage(BaseAppPage):
 
     def add_to_cart_button_click(self):
         """ Clicks on the add to cart button. """
-
         try:
             add_to_cart = WebDriverWait(self._driver, 5).until(
             EC.element_to_be_clickable((By.XPATH, self.ADD_TO_CART_BUTTON)))

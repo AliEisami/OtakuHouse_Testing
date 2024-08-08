@@ -11,6 +11,8 @@ from logic.browser.base_app_page import BaseAppPage
 
 class BasePageTest(unittest.TestCase):
 
+    ITEMS_PATH = '//div[@class="card-title"]'
+
     def setUp(self):
         self.browser = BrowserWrapper()
         self.config = ConfigProvider.load_from_file()
@@ -28,7 +30,7 @@ class BasePageTest(unittest.TestCase):
         base_app_page = BaseAppPage(driver)
         base_app_page.fill_search_input(self.config['search_item_name'])
         base_app_page.search_button_click()
-        WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="card-title"]')))
-        items = driver.find_elements(By.XPATH, '//div[@class="card-title"]')
+        WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, self.ITEMS_PATH)))
+        items = driver.find_elements(By.XPATH, self.ITEMS_PATH)
         response = self.base_app_page_api.search(self.config['search_item_name'])
         self.assertEqual(len(items), len(response.data['products']))
