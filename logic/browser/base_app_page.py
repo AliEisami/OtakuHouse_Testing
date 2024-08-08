@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from infra.browser.base_page import BasePage
-from selenium.webdriver.support.ui import Select
 
 
 class BaseAppPage(BasePage):
@@ -13,6 +12,7 @@ class BaseAppPage(BasePage):
     SEARCH_BUTTON = '//button[@class="p-2 mx-sm-2 btn btn-outline-success"]'
     CART_BUTTON = '//a[@data-rb-event-key="#/cart"]'
     LOGIN_BUTTON = '//a[@data-rb-event-key="#/login"]'
+    LOGOUT_BUTTON = '//a[text()="Logout"]'
     USERNAME_DROPDOWN = '//a[@id="username"]'
     PROFILE_BUTTON = '//a[@href="#/profile"]'
 
@@ -88,3 +88,15 @@ class BaseAppPage(BasePage):
     def search_flow(self, item_name):
         self.fill_search_input(item_name)
         self.search_button_click()
+
+    def logout(self):
+        try:
+            username_dropdown = WebDriverWait(self._driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, self.USERNAME_DROPDOWN)))
+            username_dropdown.click()
+            logout_button = WebDriverWait(self._driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, self.LOGOUT_BUTTON)))
+            logout_button.click()
+        except NoSuchElementException as e:
+            print("NoSuchElementException:", e)
+
