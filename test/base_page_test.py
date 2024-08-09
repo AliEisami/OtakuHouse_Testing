@@ -1,4 +1,5 @@
 import logging
+import os
 import unittest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,7 +11,6 @@ from logic.api.base_app_page_api import BaseAppPageAPI
 from logic.api.registration_api import RegistrationAPI
 from logic.browser.base_app_page import BaseAppPage
 from logic.browser.login_page import LoginPage
-from infra.logger import Logger
 
 
 class BasePageTest(unittest.TestCase):
@@ -19,7 +19,9 @@ class BasePageTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.api_wrapper = APIWrapper()
 
     def test_api_search(self):

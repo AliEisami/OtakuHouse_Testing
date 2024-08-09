@@ -22,7 +22,7 @@ class ItemPage(BaseAppPage):
         """ Clicks on the add to cart button. """
         try:
             add_to_cart = WebDriverWait(self._driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, self.ADD_TO_CART_BUTTON)))
+                EC.element_to_be_clickable((By.XPATH, self.ADD_TO_CART_BUTTON)))
             add_to_cart.click()
         except NoSuchElementException as e:
             print("NoSuchElementException:", e)

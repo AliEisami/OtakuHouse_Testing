@@ -1,3 +1,5 @@
+import os
+
 from selenium import webdriver
 from infra.config_provider import ConfigProvider
 
@@ -10,7 +12,9 @@ class BrowserWrapper:
             loads configuration from file, and prints "Test Start".
         """
         self._driver = None
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         print("Test Start")
 
     def get_driver(self, url):

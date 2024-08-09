@@ -1,4 +1,5 @@
 import logging
+import os
 import unittest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,14 +11,15 @@ from logic.api.login_api import LoginAPI
 from logic.api.registration_api import RegistrationAPI
 from logic.browser.base_app_page import BaseAppPage
 from logic.browser.login_page import LoginPage
-from infra.logger import Logger
 
 
 class LoginTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.api_wrapper = APIWrapper()
 
     def test_api_valid_login(self):

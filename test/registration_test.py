@@ -1,18 +1,20 @@
 import logging
+import os
 import unittest
 from infra.api.api_wrapper import APIWrapper
 from infra.browser.browser_wrapper import BrowserWrapper
 from infra.config_provider import ConfigProvider
 from infra.utils import Utils
 from logic.api.registration_api import RegistrationAPI
-from infra.logger import Logger
 
 
 class RegistrationTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.api_wrapper = APIWrapper()
         self.registration_api = RegistrationAPI(self.api_wrapper)
 

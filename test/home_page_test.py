@@ -1,4 +1,5 @@
 import logging
+import os
 import unittest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -9,7 +10,6 @@ from infra.config_provider import ConfigProvider
 from infra.utils import Utils
 from logic.api.item_page_api import ItemPageAPI
 from logic.browser.home_page import HomePage
-from infra.logger import Logger
 
 
 class HomePageTest(unittest.TestCase):
@@ -18,7 +18,9 @@ class HomePageTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.driver = self.browser.get_driver(self.config['url'])
         self.api_wrapper = APIWrapper()
         self.home_page = HomePage(self.driver)

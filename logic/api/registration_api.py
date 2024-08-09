@@ -1,3 +1,5 @@
+import os
+
 from infra.api.api_wrapper import APIWrapper
 from infra.config_provider import ConfigProvider
 
@@ -6,7 +8,9 @@ class RegistrationAPI:
 
     def __init__(self, request: APIWrapper):
         self._request = request
-        self._config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
 
     def registration(self, email, username, password):
         """
@@ -23,4 +27,4 @@ class RegistrationAPI:
             "name": username,
             "password": password
         }
-        return self._request.post_request(url=f"{self._config['url']}{self._config['register_endpoint']}", json=payload)
+        return self._request.post_request(url=f"{self.config['url']}{self.config['register_endpoint']}", json=payload)

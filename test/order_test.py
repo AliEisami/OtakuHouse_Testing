@@ -1,4 +1,5 @@
 import logging
+import os
 import unittest
 from selenium.webdriver.common.by import By
 from infra.api.api_wrapper import APIWrapper
@@ -10,14 +11,15 @@ from logic.browser.base_app_page import BaseAppPage
 from logic.browser.login_page import LoginPage
 from logic.browser.order_page import OrderPage
 from logic.browser.profile_page import ProfilePage
-from infra.logger import Logger
 
 
 class OrderTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.driver = self.browser.get_driver(self.config['url'])
         self.api_wrapper = APIWrapper()
         RegistrationAPI(self.api_wrapper).registration(self.config['email'], self.config['username'], self.config['password'])

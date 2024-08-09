@@ -1,4 +1,5 @@
 import logging
+import os
 import unittest
 from infra.api.api_wrapper import APIWrapper
 from infra.browser.browser_wrapper import BrowserWrapper
@@ -8,14 +9,15 @@ from logic.api.item_page_api import ItemPageAPI
 from logic.browser.cart_page import CartPage
 from logic.browser.home_page import HomePage
 from logic.browser.item_page import ItemPage
-from infra.logger import Logger
 
 
 class ItemPageTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = BrowserWrapper()
-        self.config = ConfigProvider.load_from_file()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file_path = os.path.join(base_dir, '../config.json')
+        self.config = ConfigProvider().load_from_file(self.config_file_path)
         self.driver = self.browser.get_driver(self.config['url'])
         self.home_page = HomePage(self.driver)
         self.item_page = ItemPage(self.driver)
