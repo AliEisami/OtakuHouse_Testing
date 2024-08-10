@@ -1,7 +1,11 @@
-from jira import JIRA, JIRAError
-from infra.secret_provider import SecretProvider
+import os
 
-jira_api_token = SecretProvider.load_from_file()['jira_token']
+from jira import JIRA, JIRAError
+from infra.config_provider import ConfigProvider
+
+jira_api_token = base_dir = os.path.dirname(os.path.abspath(__file__))
+config_file_path = os.path.join(base_dir, '../../secret.json')
+config = ConfigProvider().load_from_file(config_file_path)
 
 # JIRA Server URL
 jira_url = 'https://alieisami.atlassian.net'

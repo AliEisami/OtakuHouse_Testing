@@ -29,7 +29,8 @@ class LoginTest(unittest.TestCase):
             response contains the expected username.
         """
         logging.info("API Valid Login Test Started")
-        RegistrationAPI(self.api_wrapper).registration(self.config['email'], self.config['username'], self.config['password'])
+        RegistrationAPI(self.api_wrapper).registration(self.config['email'], self.config['username'],
+                                                       self.config['password'])
         login_api = LoginAPI(self.api_wrapper)
         response = login_api.login(self.config['email'], self.config['password'])
         self.assertTrue(response.ok)
@@ -58,6 +59,8 @@ class LoginTest(unittest.TestCase):
         performs a login with valid credentials, and verifies that the user is redirected to the home page.
         """
         logging.info("UI Valid Login Test Started")
+        RegistrationAPI(self.api_wrapper).registration(self.config['email'], self.config['username'],
+                                                       self.config['password'])
         driver = self.browser.get_driver(self.config['url'])
         BaseAppPage(driver).login_button_click()
         login_page = LoginPage(driver)

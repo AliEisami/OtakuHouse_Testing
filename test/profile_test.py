@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from infra.api.api_wrapper import APIWrapper
 from infra.browser.browser_wrapper import BrowserWrapper
 from infra.config_provider import ConfigProvider
-from jira_client_setup import create_issue
+from infra.jira_client_setup import create_issue
 from logic.api.profile_api import ProfileAPI
 from logic.api.registration_api import RegistrationAPI
 from logic.browser.base_app_page import BaseAppPage
@@ -29,38 +29,6 @@ class ProfileTest(unittest.TestCase):
         self.base_page.login_button_click()
         LoginPage(self.driver).login_flow(self.config['email'], self.config['password'])
 
-    # def test_profile_update_password(self):
-    #     """
-    #     Test the UI functionality for updating the user password. This test navigates to the profile page, fills
-    #     in the necessary fields to update the password, and clicks the update button.
-    #     """
-    #     logging.info("UI Password Update Test Started")
-    #     self.base_page.open_profile()
-    #     profile_page = ProfilePage(self.driver)
-    #     try:
-    #         profile_page.fill_email_input(self.config['email'])
-    #         profile_page.fill_password_input(self.config['new_password'])
-    #         profile_page.fill_confirm_password_input(self.config['new_password'])
-    #         profile_page.update_button_click()
-    #         email_input = WebDriverWait(self.driver, 10).until(
-    #             EC.element_to_be_clickable((By.XPATH, profile_page.EMAIL_INPUT)))
-    #         self.assertEqual(email_input.get_attribute('value'), "")
-    #     except Exception as e:
-    #         error_message = traceback.format_exc()
-    #         summary = 'Test Failure: Example Test'
-    #         description = (
-    #             f"Test failed with error: {error_message}\n"
-    #             "Steps to reproduce:\n"
-    #             "1. Open the website.\n"
-    #             "2. Try to find the element with ID 'non-existent-element'.\n"
-    #             "Expected outcome:\n"
-    #             "The element should be present.\n"
-    #             "Actual outcome:\n"
-    #             "The element was not found.\n"
-    #         )
-    #         create_issue(summary,description,'OHTP')
-    #     logging.info("Done\n_______________________________________________________")
-
     def test_profile_update_password(self):
         """
         Test the UI functionality for updating the user password. This test navigates to the profile page, fills
@@ -69,8 +37,7 @@ class ProfileTest(unittest.TestCase):
         logging.info("UI Password Update Test Started")
         self.base_page.open_profile()
         profile_page = ProfilePage(self.driver)
-        project_key = 'OHTP'  # Your JIRA project key
-
+        project_key = 'OHTP'
         try:
             profile_page.fill_email_input(self.config['email'])
             profile_page.fill_password_input(self.config['new_password'])
@@ -80,10 +47,7 @@ class ProfileTest(unittest.TestCase):
             email_input = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, profile_page.EMAIL_INPUT))
             )
-
-            # This is where the assertion is failing
             self.assertEqual(email_input.get_attribute('value'), "")
-
         except AssertionError as e:
             logging.error(f"Test failed: {str(e)}")
             summary = "UI Test Failure: Profile Update Password"
@@ -101,7 +65,7 @@ class ProfileTest(unittest.TestCase):
                 logging.info(f"JIRA issue created with key: {issue_key}")
             except Exception as jira_error:
                 logging.error(f"Failed to create JIRA issue: {str(jira_error)}")
-            raise  # Re-raise the exception to ensure the test is marked as failed
+            raise
 
         except Exception as e:
             logging.error(f"An unexpected error occurred: {str(e)}")
@@ -116,6 +80,7 @@ class ProfileTest(unittest.TestCase):
             except Exception as jira_error:
                 logging.error(f"Failed to create JIRA issue: {str(jira_error)}")
             raise
+        logging.info("Done\n_______________________________________________________")
 
     def test_api_profile_update_password(self):
         """
