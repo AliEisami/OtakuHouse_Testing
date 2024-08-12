@@ -4,7 +4,7 @@ from infra.api.api_wrapper import APIWrapper
 from infra.config_provider import ConfigProvider
 
 
-class LoginAPI:
+class OrderAPI:
 
     def __init__(self, request: APIWrapper):
         self._request = request
@@ -12,17 +12,17 @@ class LoginAPI:
         self._config_file_path = os.path.join(base_dir, '../../config.json')
         self._config = ConfigProvider().load_from_file(self._config_file_path)
 
-    def login(self, email, password):
+    def place_an_order(self, payload):
         """
-        Authenticates a user with the provided email and password.
+        Places an order with the given payload.
         Args:
-            email (str): The email address of the user.
-            password (str): The password for the user account.
+            payload (dict): The order details to be sent in the request body.
         Returns:
             Response: The response object from the POST request.
         """
-        payload = {
-            "username": email,
-            "password": password
+        payload = payload
+        headers = {
+            "Authorization": self._config['Authorization']
         }
-        return self._request.post_request(url=f"{self._config['url']}{self._config['login_endpoint']}", json=payload)
+        return self._request.post_request(url=f"{self._config['url']}{self._config['order_endpoint']}",
+                                          headers=headers, json=payload)

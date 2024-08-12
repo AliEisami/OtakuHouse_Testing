@@ -5,11 +5,52 @@
   "login_endpoint" : "/api/users/login/",
   "get_product_endpoint": "/api/products/",
   "review_endpoint": "/reviews/",
+  "order_endpoint": "/api/orders/add/",
+  "password_update_endpoint": "/api/users/profile/update/",
+  "id": 9,
   "email" : "qautomation5tech@gmail.com",
   "username" : "5tech",
   "password" : "@QAutomation5",
+  "new_password": "QAutomation@5",
   "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NjA5MTA2LCJqdGkiOiJiYjI4OWE3ZTdhZWU0MzFiYjY1MTJiYjY2M2E1NzY3YSIsInVzZXJfaWQiOjh9.u00ijZXA-LSIlDcKQPVeUC-1LQFTYKT8BYcUU0EiuIw",
   "search_item_name": "Demon",
   "review_rating": "4",
-  "review_text": "its a good item"
+  "review_text": "its a good item",
+  "order": {
+    "itemsPrice": "3599.00",
+    "orderItems": [
+        {
+            "countInStock": 7,
+            "image": "/media/images/goku_veg_figure.jpg",
+            "name": "Dragon Ball Super - Son Goku & Vegeta Figure",
+            "price": "3599.00",
+            "product": 26,
+            "qty": 1
+        }
+    ],
+    "paymentMethod": "PayPal",
+    "shippingAddress": {
+        "address": "Daliyat al-Karmel",
+        "city": "haifa",
+        "country": "Israel",
+        "postalCode": "3005600"
+    },
+    "shippingPrice": "0.00",
+    "taxPrice": "295.12",
+    "totalPrice": "3894.12"
+  },
+  "payment_details": {
+    "First_Name":"Daniel",
+    "Last_Name":"Pouros",
+    "Credit_Card_Number":"5413563429274472",
+    "Expiry_Date":"03/27",
+    "cvv":"979",
+    "Phone": 9142497164,
+    "street": "0",
+    "city": "Dalia",
+    "state": "Israel",
+    "zipcode": "10001",
+    "email": "qautomation5tech@gmail.com",
+    "jira_project_key": "OHTP"
+  }
 }
