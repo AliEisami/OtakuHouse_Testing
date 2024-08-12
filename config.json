@@ -12,7 +12,7 @@
   "username" : "5tech",
   "password" : "@QAutomation5",
   "new_password": "QAutomation@5",
-  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1ODA2MjQwLCJqdGkiOiJmNTZjNDdjZDM5MzM0ZDI5ODE0NjUxMjAzYmU4ZWJjYSIsInVzZXJfaWQiOjl9.JZK3-NzU-dQM6uHoLNrbxYIs15GJz7KL_hRN3uDZelU",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NjA5MTA2LCJqdGkiOiJiYjI4OWE3ZTdhZWU0MzFiYjY1MTJiYjY2M2E1NzY3YSIsInVzZXJfaWQiOjh9.u00ijZXA-LSIlDcKQPVeUC-1LQFTYKT8BYcUU0EiuIw",
   "search_item_name": "Demon",
   "review_rating": "4",
   "review_text": "its a good item",
@@ -50,6 +50,7 @@
     "city": "Dalia",
     "state": "Israel",
     "zipcode": "10001",
-    "email": "qautomation5tech@gmail.com"
+    "email": "qautomation5tech@gmail.com",
+    "jira_project_key": "OHTP"
   }
 }

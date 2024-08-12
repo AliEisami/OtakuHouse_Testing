@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -44,6 +46,8 @@ class ProfilePage(BasePage):
                 EC.presence_of_all_elements_located((By.XPATH, self.ITEM_DETAILS_BUTTON)))
             order = WebDriverWait(self._driver, 5).until(
                 EC.element_to_be_clickable((orders[len(orders)-1])))
+            self._driver.execute_script("arguments[0].scrollIntoView(true);", order)
+            time.sleep(1)
             order.click()
         except NoSuchElementException as e:
             print("NoSuchElementException:", e)
@@ -56,6 +60,7 @@ class ProfilePage(BasePage):
         """
         email_input = WebDriverWait(self._driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, self.EMAIL_INPUT)))
+        email_input.clear()
         email_input.send_keys(email)
 
     def fill_password_input(self, password):

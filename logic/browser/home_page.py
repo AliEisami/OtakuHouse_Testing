@@ -31,9 +31,8 @@ class HomePage(BasePage):
         try:
             items = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_all_elements_located((By.XPATH, self.ALL_ITEMS_IN_PAGE)))
-            self._driver.execute_script("arguments[0].scrollIntoView(true);", items[int(item_number)])
+            self._driver.execute_script("arguments[0].scrollIntoView(true);", items[int(item_number)-19])
             time.sleep(1)
-            items[int(item_number)].click()
-            BaseAppPage(self._driver).scroll(0)
+            items[int(item_number)-19].click()
         except NoSuchElementException as e:
             print("NoSuchElementException:", e)

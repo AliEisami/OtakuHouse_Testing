@@ -1,12 +1,9 @@
 import time
 from selenium.webdriver.support.ui import Select
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from infra.browser.base_page import BasePage
-from infra.utils import Utils
-from logic.browser.base_app_page import BaseAppPage
 
 
 class OrderPage(BasePage):
@@ -179,21 +176,23 @@ class OrderPage(BasePage):
             EC.element_to_be_clickable((By.XPATH, self.PAY_NOW_BUTTON)))
         time.sleep(3)
         self._driver.execute_script("arguments[0].scrollIntoView(true);", pay_now_button)
+        time.sleep(1)
         pay_now_button.click()
 
-    def payment_flow(self, card_number, date, cvv, firstname, lastname, street_name, city, zipcode, phone, email):
+    def payment_flow(self, payment_details):
         """
          Completes the payment form with the provided details and submits the payment.
         """
-        self.enter_card_number(card_number)
-        self.enter_card_date(date)
-        self.enter_card_cvv(cvv)
+        self.enter_card_number(payment_details['Credit_Card_Number'])
+        self.enter_card_date(payment_details['Expiry_Date'])
+        self.enter_card_cvv(payment_details['cvv'])
         self.pick_state()
-        self.enter_customer_firstname(firstname)
-        self.enter_customer_lastname(lastname)
-        self.enter_customer_street(street_name)
-        self.enter_customer_city(city)
-        self.enter_customer_zipcode(zipcode)
-        self.enter_customer_phone(phone)
-        self.enter_customer_email(email)
+        self.enter_customer_firstname(payment_details['First_Name'])
+        self.enter_customer_lastname(payment_details['Last_Name'])
+        self.enter_customer_street(payment_details['street'])
+        self.enter_customer_city(payment_details['city'])
+        self.enter_customer_zipcode(payment_details['zipcode'])
+        self.enter_customer_phone(payment_details['Phone'])
+        self.enter_customer_email(payment_details['email'])
         self.click_pay_now_button()
+        self._driver.switch_to.default_content()

@@ -8,6 +8,7 @@ from infra.browser.base_page import BasePage
 class CartPage(BasePage):
 
     CART_ITEMS = '//div[@class="list-group-item"]//div[@class="row"]'
+    ITEM_NAME = '//div[@m="3"]//a'
 
     def __init__(self, driver):
         """
@@ -28,4 +29,11 @@ class CartPage(BasePage):
                 EC.presence_of_all_elements_located((By.XPATH, self.CART_ITEMS)))
         except NoSuchElementException as e:
             print("NoSuchElementException:", e)
-        return None
+
+    def get_item_name(self):
+        try:
+            return WebDriverWait(self._driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, self.ITEM_NAME))).text
+        except NoSuchElementException as e:
+            print("NoSuchElementException:", e)
+            return None

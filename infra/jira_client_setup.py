@@ -3,9 +3,8 @@ import os
 from jira import JIRA, JIRAError
 from infra.config_provider import ConfigProvider
 
-jira_api_token = base_dir = os.path.dirname(os.path.abspath(__file__))
-config_file_path = os.path.join(base_dir, '../../secret.json')
-config = ConfigProvider().load_from_file(config_file_path)
+config = ConfigProvider().load_from_file('C:\\Users\\aliei\\Desktop\\5TECH\\OtakuHouse\\automation_testing\\secret.json')
+jira_api_token = config['jira_token']
 
 # JIRA Server URL
 jira_url = 'https://alieisami.atlassian.net'
